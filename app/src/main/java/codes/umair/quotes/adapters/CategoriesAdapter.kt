@@ -25,7 +25,6 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-
             is CategoryViewHolder -> {
                 holder.bind(items[position])
             }
@@ -46,20 +45,20 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
-        val categoryName: TextView = itemView.tv_catName
-        val cv = itemView.cv
+        private val categoryName: TextView = itemView.tv_catName
+        private val cv = itemView.cv
         fun bind(category: String?) {
-            categoryName.text = category
+            categoryName.text = category?.capitalize()
+
             val color = Color.rgb(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
             cv.setCardBackgroundColor(color)
-            val luminace = ColorUtils.calculateLuminance(color)
-            if (luminace > 0.25) {
+            val lightness = ColorUtils.calculateLuminance(color)
+            if (lightness > 0.50) {
                 categoryName.setTextColor(Color.BLACK)
             } else {
                 categoryName.setTextColor(Color.WHITE)
             }
         }
-
     }
 
 }
