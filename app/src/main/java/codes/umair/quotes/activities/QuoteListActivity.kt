@@ -14,10 +14,12 @@ import java.io.InputStream
 
 class QuoteListActivity : AppCompatActivity() {
     private val quotes = ArrayList<Quote>()
-
+    private var title: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quote_list)
+        title = intent.getStringExtra("fileName")?.dropLast(5)
+        setTitle(title)
         getQuotes()
         initRecyclerView()
     }
@@ -37,7 +39,7 @@ class QuoteListActivity : AppCompatActivity() {
                 val jSONObject = jSONArray.getJSONObject(i)
                 val quote = jSONObject.getString("quote")
                 val author = jSONObject.getString("author")
-                val quoteObj = Quote(quote, author)
+                val quoteObj = Quote(quote.replace("&#39;", "'"), author)
                 quotes.add(quoteObj)
             }
         } catch (e: JSONException) {
@@ -47,7 +49,7 @@ class QuoteListActivity : AppCompatActivity() {
 
     private fun readJsonFromAsset(): String? {
         val fileName = intent.getStringExtra("fileName")
-        var json: String? = null
+        var json: String?
         try {
             val inputStream: InputStream = assets.open(fileName)
             json = inputStream.bufferedReader().use { it.readText() }
