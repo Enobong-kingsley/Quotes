@@ -3,7 +3,6 @@ package codes.umair.quotes.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import codes.umair.quotes.R
 import codes.umair.quotes.adapters.CategoriesAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,12 +29,13 @@ class MainActivity : AppCompatActivity() {
     private fun loadNames() {
         var list: Array<String>? = null
         try {
-            list = assets.list("" + "quotes")
+            list = assets.list("")
             if (list!!.size > 0) {
                 // This is a folder
                 for (file in list) {
                     // This is a file
-                    categories.add(file.dropLast(5))
+                    if (file.contains(".json"))
+                        categories.add(file.dropLast(5))
                 }
             }
         } catch (e: Exception) {
