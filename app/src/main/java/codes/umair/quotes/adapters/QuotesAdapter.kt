@@ -1,9 +1,15 @@
 package codes.umair.quotes.adapters
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import codes.umair.quotes.Quote
 import codes.umair.quotes.R
@@ -41,10 +47,29 @@ class QuotesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
+        private val ctx = itemView.context
         private val tvQuote: TextView = itemView.tv_quote
+        private val btnCopy: Button = itemView.btn_copy
+        private val btnShare = itemView.btn_share
+        private var myClipboard: ClipboardManager? =
+            ctx.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+
         fun bind(quoteObj: Quote) {
             val text = "${quoteObj.quote}\n${quoteObj.author}"
             tvQuote.text = text
+
+            btnShare.setOnClickListener {
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_TEXT, text)
+                ctx.startActivity(Intent.createChooser(shareIntent, "Share View"))
+            }
+            btnCopy.setOnClickListener {
+                val myClip = ClipData.newPlainText("text", text)
+                myClipboard?.setPrimaryClip(myClip)
+                Toast.makeText(ctx, "Copied to Clipboard!", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
