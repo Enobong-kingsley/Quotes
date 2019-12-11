@@ -11,8 +11,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import codes.umair.quotes.Quote
 import codes.umair.quotes.R
+import codes.umair.quotes.model.Quote
 import kotlinx.android.synthetic.main.quote_item.view.*
 
 
