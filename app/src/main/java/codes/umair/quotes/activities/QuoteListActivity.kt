@@ -3,9 +3,9 @@ package codes.umair.quotes.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import codes.umair.quotes.Quote
 import codes.umair.quotes.R
 import codes.umair.quotes.adapters.QuotesAdapter
-import codes.umair.quotes.model.Quote
 import kotlinx.android.synthetic.main.activity_quote_list.*
 import org.json.JSONArray
 import org.json.JSONException
