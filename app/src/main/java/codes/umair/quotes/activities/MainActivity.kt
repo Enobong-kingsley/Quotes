@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         val categoriesAdapter = CategoriesAdapter()
-        categoriesAdapter.submitList(categories)
+        categoriesAdapter.submitList(categories, this@MainActivity)
         recyclerView.adapter = categoriesAdapter
     }
 

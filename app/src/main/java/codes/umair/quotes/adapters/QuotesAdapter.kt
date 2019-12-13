@@ -11,8 +11,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import codes.umair.quotes.R
 import codes.umair.quotes.Quote
+import codes.umair.quotes.R
 import kotlinx.android.synthetic.main.quote_item.view.*
 
 
@@ -24,6 +24,7 @@ class QuotesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             LayoutInflater.from(parent.context).inflate(R.layout.quote_item, parent, false)
         )
     }
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {

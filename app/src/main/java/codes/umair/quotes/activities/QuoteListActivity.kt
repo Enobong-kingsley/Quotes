@@ -1,7 +1,9 @@
 package codes.umair.quotes.activities
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import codes.umair.quotes.Quote
 import codes.umair.quotes.R
@@ -19,7 +21,15 @@ class QuoteListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quote_list)
         setSupportActionBar(toolbar)
         title = intent.getStringExtra("fileName")?.dropLast(5)
+        val cardColor = intent.getIntExtra("color", 0)
+        cv.setCardBackgroundColor(cardColor)
         setTitle(title)
+        val lightness = ColorUtils.calculateLuminance(cardColor)
+        if (lightness > 0.50) {
+            toolbar.setTitleTextColor(Color.BLACK)
+        } else {
+            toolbar.setTitleTextColor(Color.WHITE)
+        }
         getQuotes()
         initRecyclerView()
     }
@@ -59,4 +69,5 @@ class QuoteListActivity : AppCompatActivity() {
         }
         return json
     }
+
 }
