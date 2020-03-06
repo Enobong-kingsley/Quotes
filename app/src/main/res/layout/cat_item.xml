@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.skydoves.transformationlayout.TransformationLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv"
+    android:id="@+id/transformationLayout"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="5dp"
-    android:transitionName="myanim"
-    app:cardElevation="10dp">
+    app:transformation_duration="400"
+    app:transformation_fadeMode="through">
 
-    <TextView
-        android:layout_margin="3dp"
-        android:id="@+id/tv_catName"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Amazing"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:transitionName="myanim"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:id="@+id/tv_catName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:text="Amazing"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</com.skydoves.transformationlayout.TransformationLayout>

@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.RecyclerView
 import codes.umair.quotes.R
 import codes.umair.quotes.activities.QuoteListActivity
+import com.skydoves.transformationlayout.TransformationLayout
 import kotlinx.android.synthetic.main.cat_item.view.*
 import kotlin.random.Random
 
@@ -51,6 +51,7 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
+        private val transformationLayout: TransformationLayout = itemView.transformationLayout
         private val categoryName: TextView = itemView.tv_catName
         private val cv = itemView.cv
         private val ctx = itemView.context
@@ -59,11 +60,18 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             cv.setOnClickListener {
                 val openQuotesCategory = Intent(ctx, QuoteListActivity::class.java)
+                val bundle = transformationLayout.withContext(ctx, "myTransformAnim")
                 openQuotesCategory.putExtra("fileName", category?.capitalize() + ".json")
                 openQuotesCategory.putExtra("color", color)
-                val options: ActivityOptionsCompat =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, cv, "myanim")
-                ctx.startActivity(openQuotesCategory, options.toBundle())
+                openQuotesCategory.putExtra(
+                    "TransformationParams",
+                    transformationLayout.getParcelableParams()
+                )
+
+                ctx.startActivity(openQuotesCategory, bundle)
+//                val options: ActivityOptionsCompat =
+//                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, cv, "myanim")
+//                ctx.startActivity(openQuotesCategory, options.toBundle())
 
             }
             categoryName.text = category?.capitalize()

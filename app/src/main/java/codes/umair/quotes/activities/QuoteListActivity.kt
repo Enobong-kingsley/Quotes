@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import codes.umair.quotes.Quote
 import codes.umair.quotes.R
 import codes.umair.quotes.adapters.QuotesAdapter
+import com.skydoves.transformationlayout.onTransformationEndContainer
 import kotlinx.android.synthetic.main.activity_quote_list.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -17,18 +18,34 @@ class QuoteListActivity : AppCompatActivity() {
     private val quotes = ArrayList<Quote>()
     private var title: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        onTransformationEndContainer(intent.getParcelableExtra("TransformationParams"))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quote_list)
         setSupportActionBar(toolbar)
+
         title = intent.getStringExtra("fileName")?.dropLast(5)
         val cardColor = intent.getIntExtra("color", 0)
+
         cv.setCardBackgroundColor(cardColor)
+//        toolbar.setBackgroundColor(cardColor)
+//        toolbar_layout.setBackgroundColor(cardColor)
+//        app_bar.setBackgroundColor(cardColor)
+        window.statusBarColor = cardColor
+        window.navigationBarColor = cardColor
+
         setTitle(title)
+
         val lightness = ColorUtils.calculateLuminance(cardColor)
         if (lightness > 0.50) {
-            toolbar.setTitleTextColor(Color.BLACK)
+            toolbar_layout.apply {
+                setCollapsedTitleTextColor(Color.BLACK)
+                setExpandedTitleColor(Color.BLACK)
+            }
         } else {
-            toolbar.setTitleTextColor(Color.WHITE)
+            toolbar_layout.apply {
+                setCollapsedTitleTextColor(Color.WHITE)
+                setExpandedTitleColor(Color.WHITE)
+            }
         }
         getQuotes()
         initRecyclerView()
