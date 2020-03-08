@@ -1,7 +1,9 @@
 package codes.umair.quotes.activities
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,27 +21,31 @@ class QuoteListActivity : AppCompatActivity() {
     private var title: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         onTransformationEndContainer(intent.getParcelableExtra("TransformationParams"))
+        val cardColor = intent.getIntExtra("color", 0)
+        val lightness = ColorUtils.calculateLuminance(cardColor)
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quote_list)
         setSupportActionBar(toolbar)
 
         title = intent.getStringExtra("fileName")?.dropLast(5)
-        val cardColor = intent.getIntExtra("color", 0)
+
 
         cv.setCardBackgroundColor(cardColor)
-//        toolbar.setBackgroundColor(cardColor)
-//        toolbar_layout.setBackgroundColor(cardColor)
-//        app_bar.setBackgroundColor(cardColor)
         window.statusBarColor = cardColor
         window.navigationBarColor = cardColor
 
         setTitle(title)
 
-        val lightness = ColorUtils.calculateLuminance(cardColor)
+
         if (lightness > 0.50) {
             toolbar_layout.apply {
                 setCollapsedTitleTextColor(Color.BLACK)
                 setExpandedTitleColor(Color.BLACK)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
             }
         } else {
             toolbar_layout.apply {

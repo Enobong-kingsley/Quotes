@@ -30,7 +30,9 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is CategoryViewHolder -> {
-                holder.bind(items[position], mActivity)
+                val color = Color.rgb(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
+                holder.bind(items[position], color)
+                holder.itemView.cv.setCardBackgroundColor(color)
 
             }
 
@@ -46,17 +48,13 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         mActivity = activity
     }
 
-    class CategoryViewHolder
-    constructor(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
-
+    class CategoryViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val transformationLayout: TransformationLayout = itemView.transformationLayout
         private val categoryName: TextView = itemView.tv_catName
         private val cv = itemView.cv
         private val ctx = itemView.context
-        fun bind(category: String?, activity: Activity) {
-            val color = Color.rgb(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
+
+        fun bind(category: String?, color: Int) {
 
             cv.setOnClickListener {
                 val openQuotesCategory = Intent(ctx, QuoteListActivity::class.java)
@@ -69,9 +67,6 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 )
 
                 ctx.startActivity(openQuotesCategory, bundle)
-//                val options: ActivityOptionsCompat =
-//                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, cv, "myanim")
-//                ctx.startActivity(openQuotesCategory, options.toBundle())
 
             }
             categoryName.text = category?.capitalize()
