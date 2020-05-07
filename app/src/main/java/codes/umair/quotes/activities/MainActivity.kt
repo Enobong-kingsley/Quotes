@@ -1,6 +1,7 @@
 package codes.umair.quotes.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import codes.umair.quotes.R
@@ -32,8 +33,7 @@ class MainActivity : AppCompatActivity() {
         var list: Array<String>? = null
         try {
             list = assets.list("")
-            if (list!!.size > 0) {
-                // This is a folder
+            if (list!!.isNotEmpty()) {
                 for (file in list) {
                     // This is a file
                     if (file.contains(".json"))
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } catch (e: Exception) {
+            Toast.makeText(this@MainActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
         }
     }
 

@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,6 +54,8 @@ class QuoteListActivity : AppCompatActivity() {
                 setExpandedTitleColor(Color.WHITE)
             }
         }
+
+
         getQuotes()
         initRecyclerView()
     }
@@ -77,17 +80,19 @@ class QuoteListActivity : AppCompatActivity() {
             }
         } catch (e: JSONException) {
             e.printStackTrace()
+            Toast.makeText(this@QuoteListActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
         }
     }
 
     private fun readJsonFromAsset(): String? {
         val fileName = intent.getStringExtra("fileName")
-        var json: String?
+        lateinit var json: String
         try {
             val inputStream: InputStream = assets.open(fileName)
             json = inputStream.bufferedReader().use { it.readText() }
         } catch (e: Exception) {
             e.printStackTrace()
+            Toast.makeText(this@QuoteListActivity, e.localizedMessage, Toast.LENGTH_LONG).show()
             return null
         }
         return json

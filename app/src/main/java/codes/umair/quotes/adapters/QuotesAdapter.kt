@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import codes.umair.quotes.Quote
 import codes.umair.quotes.R
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.quote_item.view.*
 
 
@@ -69,7 +69,7 @@ class QuotesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             btnCopy.setOnClickListener {
                 val myClip = ClipData.newPlainText("text", text)
                 myClipboard?.setPrimaryClip(myClip)
-                Toast.makeText(ctx, "Copied to Clipboard!", Toast.LENGTH_SHORT).show()
+                Snackbar.make(itemView, "Copied to Clipboard!", Snackbar.LENGTH_LONG).show()
             }
         }
 
