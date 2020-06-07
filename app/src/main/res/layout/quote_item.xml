@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="5dp"
     app:cardBackgroundColor="@color/colorPrimary"
     app:cardElevation="10dp">
@@ -37,6 +39,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/ic_share" />
 
             <Button
@@ -44,6 +48,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/ic_copy" />
 
         </LinearLayout>

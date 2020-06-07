@@ -9,6 +9,8 @@
 
 
     <androidx.cardview.widget.CardView
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="150dp"
