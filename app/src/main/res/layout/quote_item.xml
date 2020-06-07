@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="@color/colorPrimary"
     app:cardElevation="10dp">
 
     <LinearLayout
@@ -22,6 +23,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:textAlignment="center"
+            android:textColor="@android:color/white"
             android:textSize="17sp" />
 
         <LinearLayout

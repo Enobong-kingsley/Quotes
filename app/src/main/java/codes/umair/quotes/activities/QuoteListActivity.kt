@@ -1,12 +1,8 @@
 package codes.umair.quotes.activities
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import codes.umair.quotes.Quote
 import codes.umair.quotes.R
@@ -22,8 +18,8 @@ class QuoteListActivity : AppCompatActivity() {
     private var title: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         onTransformationEndContainer(intent.getParcelableExtra("TransformationParams"))
-        val cardColor = intent.getIntExtra("color", 0)
-        val lightness = ColorUtils.calculateLuminance(cardColor)
+//        val cardColor = intent.getIntExtra("color", 0)
+//        val lightness = ColorUtils.calculateLuminance(cardColor)
 
 
         super.onCreate(savedInstanceState)
@@ -33,27 +29,27 @@ class QuoteListActivity : AppCompatActivity() {
         title = intent.getStringExtra("fileName")?.dropLast(5)
 
 
-        cv.setCardBackgroundColor(cardColor)
-        window.statusBarColor = cardColor
-        window.navigationBarColor = cardColor
-
-        setTitle(title)
-
-
-        if (lightness > 0.50) {
-            toolbar_layout.apply {
-                setCollapsedTitleTextColor(Color.BLACK)
-                setExpandedTitleColor(Color.BLACK)
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-            }
-        } else {
-            toolbar_layout.apply {
-                setCollapsedTitleTextColor(Color.WHITE)
-                setExpandedTitleColor(Color.WHITE)
-            }
-        }
+        cv.setCardBackgroundColor(resources.getColor(R.color.colorPrimary))
+//        window.statusBarColor = cardColor
+//        window.navigationBarColor = cardColor
+//
+//        setTitle(title)
+//
+//
+//        if (lightness > 0.50) {
+//            toolbar_layout.apply {
+//                setCollapsedTitleTextColor(Color.BLACK)
+//                setExpandedTitleColor(Color.BLACK)
+//            }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+//            }
+//        } else {
+//            toolbar_layout.apply {
+//                setCollapsedTitleTextColor(Color.WHITE)
+//                setExpandedTitleColor(Color.WHITE)
+//            }
+//        }
 
 
         getQuotes()

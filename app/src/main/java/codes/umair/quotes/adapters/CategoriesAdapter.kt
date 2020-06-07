@@ -3,18 +3,15 @@ package codes.umair.quotes.adapters
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.RecyclerView
 import codes.umair.quotes.R
 import codes.umair.quotes.activities.QuoteListActivity
 import com.skydoves.transformationlayout.TransformationLayout
 import kotlinx.android.synthetic.main.cat_item.view.*
-import kotlin.random.Random
 
 
 class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -30,9 +27,8 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is CategoryViewHolder -> {
-                val color = Color.rgb(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255))
-                holder.bind(items[position], color)
-                holder.itemView.cv.setCardBackgroundColor(color)
+                holder.bind(items[position], R.color.colorPrimary)
+                holder.itemView.cv.setCardBackgroundColor(mActivity.resources.getColor(R.color.colorPrimary))
 
             }
 
@@ -60,7 +56,7 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val openQuotesCategory = Intent(ctx, QuoteListActivity::class.java)
                 val bundle = transformationLayout.withContext(ctx, "myTransformAnim")
                 openQuotesCategory.putExtra("fileName", category?.capitalize() + ".json")
-                openQuotesCategory.putExtra("color", color)
+//                openQuotesCategory.putExtra("color", color)
                 openQuotesCategory.putExtra(
                     "TransformationParams",
                     transformationLayout.getParcelableParams()
@@ -71,13 +67,13 @@ class CategoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             categoryName.text = category?.capitalize()
 
-            cv.setCardBackgroundColor(color)
-            val lightness = ColorUtils.calculateLuminance(color)
-            if (lightness > 0.50) {
-                categoryName.setTextColor(Color.BLACK)
-            } else {
-                categoryName.setTextColor(Color.WHITE)
-            }
+
+//            val lightness = ColorUtils.calculateLuminance(color)
+//            if (lightness > 0.50) {
+//                categoryName.setTextColor(Color.BLACK)
+//            } else {
+//                categoryName.setTextColor(Color.WHITE)
+//            }
 
         }
 
