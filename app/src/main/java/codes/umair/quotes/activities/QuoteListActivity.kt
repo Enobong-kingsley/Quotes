@@ -30,10 +30,10 @@ class QuoteListActivity : AppCompatActivity() {
 
 
         cv.setCardBackgroundColor(resources.getColor(R.color.colorPrimary))
-//        window.statusBarColor = cardColor
-//        window.navigationBarColor = cardColor
-//
-//        setTitle(title)
+        window.statusBarColor = resources.getColor(R.color.colorPrimary)
+        window.navigationBarColor = resources.getColor(R.color.colorPrimary)
+
+        setTitle(title)
 //
 //
 //        if (lightness > 0.50) {

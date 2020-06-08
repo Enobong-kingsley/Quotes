@@ -24,6 +24,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="5dp"
+            android:text="With Power comes  Great Responsibility"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
